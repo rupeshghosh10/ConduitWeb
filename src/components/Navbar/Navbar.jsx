@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isNavbarCollapsed, setIsNavbarCollapsed] = useState(true);
@@ -8,8 +9,8 @@ const Navbar = () => {
   }
 
   return (
-    <nav className='navbar navbar-expand-md navbar-dark bg-dark border-bottom'>
-      <div class="container-fluid">
+    <nav className='navbar navbar-expand-sm navbar-dark bg-dark border-bottom'>
+      <div className="container-fluid">
         <a className='navbar-brand mb-0 h1' href='/'>Conduit</a>
         <button className='navbar-toggler' type='button' onClick={handleNavbarCollapse}>
           <span className='navbar-toggler-icon'></span>
@@ -28,7 +29,7 @@ const Navbar = () => {
           </ul>
           <ul className='navbar-nav ms-auto'>
             <li className='nav-item'>
-              <a className='nav-link' href='/'>Sign in</a>
+              <Link className='nav-link' to='/signin'>Sign in</Link>
             </li>
             <li className='nav-item'>
               <a className='nav-link' href='/'>Sign up</a>
