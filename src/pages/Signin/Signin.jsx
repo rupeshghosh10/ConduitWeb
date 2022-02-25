@@ -16,9 +16,7 @@ const schema = yup.object({
 const Signin = () => {
 
   const [isLoading, setIsLoading] = useState(false);
-  const { register, formState: { errors }, handleSubmit } = useForm({
-    resolver: yupResolver(schema)
-  });
+  const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(schema) });
   const dispatch = useDispatch();
 
   const handleSignin = async data => {
@@ -35,39 +33,37 @@ const Signin = () => {
   };
 
   return (
-    <div className='d-flex justify-content-center align-items-center h-100'>
+    <div className='d-flex justify-content-center align-items-center h-100 w-100'>
       {isLoading &&
         <div className={`d-flex align-items-center justify-content-center w-100 h-100 position-absolute ${styles.loading}`}>
           <Loading width={100} />
         </div>}
-      <div className='px-sm-5 px-4 py-4 border border-secondary rounded'>
-        <form onSubmit={handleSubmit(handleSignin)}>
-          <h1 className='text-center'>Sign In</h1>
-          <p className='mb-4 text-center'>Please enter your email and password</p>
-          <div className='form-floating has-validation'>
-            <input
-              type='text'
-              className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-              placeholder='Email Address'
-              {...register('email')} />
-            <label htmlFor='email'>Email Address</label>
-            <p className='invalid-feedback m-0 ps-1'>{errors.email?.message}</p>
-          </div>
-          <div className='form-floating has-validation'>
-            <input
-              type='password'
-              className={`form-control mt-1 ${errors.password ? 'is-invalid' : ''}`}
-              placeholder='Password'
-              {...register('password')} />
-            <label htmlFor='password'>Password</label>
-            <p className='invalid-feedback m-0 ps-1'>{errors.password?.message}</p>
-          </div>
-          <input type='submit' className='btn btn-lg btn-primary w-100 mt-1' value='Sign In' />
-        </form>
+      <form className='needs-validation' onSubmit={handleSubmit(handleSignin)}>
+        <h1 className='text-center'>Sign In</h1>
+        <p className='mb-4 text-center'>Please enter your email and password</p>
+        <div className='form-floating has-validation'>
+          <input
+            type='text'
+            className={`form-control form-control-lg ${errors.email ? 'is-invalid' : ''}`}
+            placeholder='Email Address'
+            {...register('email')} />
+          <label htmlFor='email'>Email Address</label>
+          <p className='invalid-feedback m-0 ps-1'>{errors.email?.message}</p>
+        </div>
+        <div className='form-floating has-validation'>
+          <input
+            type='password'
+            className={`form-control mt-1 form-control-lg ${errors.password ? 'is-invalid' : ''}`}
+            placeholder='Password'
+            {...register('password')} />
+          <label htmlFor='password'>Password</label>
+          <p className='invalid-feedback m-0 ps-1'>{errors.password?.message}</p>
+        </div>
+        <input type='submit' className='btn btn-lg btn-primary w-100 mt-1' value='Sign In' />
         <div className='mt-4 text-center'>
           <p>Don't have an account? <a href='/' className='fw-bold text-decoration-none link-primary'>Sign Up</a></p>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
