@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signoutAction } from '../../store/user/userAction';
 
 const Navbar = () => {
@@ -8,6 +8,7 @@ const Navbar = () => {
   const [isNavbarCollapsed, setIsNavbarCollapsed] = useState(true);
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleNavbarCollapse = () => {
     setIsNavbarCollapsed(!isNavbarCollapsed);
@@ -16,10 +17,11 @@ const Navbar = () => {
   const handleSignout = e => {
     e.preventDefault();
     dispatch(signoutAction());
+    navigate('/');
   }
 
   return (
-    <nav className='navbar navbar-expand-sm navbar-dark bg-dark border-bottom fixed-top'>
+    <nav className='navbar navbar-expand-sm navbar-dark bg-dark sticky-top'>
       <div className="container-fluid">
         <a className='navbar-brand mb-0 h1' href='/'>Conduit</a>
         <button className='navbar-toggler' type='button' onClick={handleNavbarCollapse}>
@@ -53,7 +55,7 @@ const Navbar = () => {
                   <a className='nav-link' href='/'>{user.email}</a>
                 </li>
                 <li>
-                  <a className='nav-link' href='/signout' onClick={handleSignout}>Sing out</a>
+                  <Link to='/signout' className='nav-link' onClick={handleSignout}>Sign out</Link>
                 </li>
               </>}
           </ul>

@@ -1,44 +1,59 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import Loading from '../../components/Loading/Loading';
 import { signin } from '../../services/userApi';
 import { signinAction } from '../../store/user/userAction';
-import styles from './Signin.module.css';
+import { Link, useNavigate } from 'react-router-dom';
+import FullScreenLoading from '../../components/FullScreenLoading/FullScreenLoading';
 
 const schema = yup.object({
-  email: yup.string().required('Email is required').email('Email must be a valid email'),
-  password: yup.string().required('Password is required')
+  email: yup.string().required('Email is required').email('Email must be a valid email').max(50),
+  password: yup.string().required('Password is required').max(50)
 });
 
 const Signin = () => {
 
   const [isLoading, setIsLoading] = useState(false);
-  const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(schema) });
+  const { register, formState: { errors }, handleSubmit, setError } = useForm({ resolver: yupResolver(schema) });
   const dispatch = useDispatch();
+  const user = useSelector(x => x.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user.isSignedIn) {
+      navigate('/');
+    }
+  }, [user]);
 
   const handleSignin = async data => {
     setIsLoading(true);
     try {
       const response = await signin(data);
       dispatch(signinAction(response));
+      navigate('/');
     }
     catch (error) {
-      console.log(error.response);
-      alert(error);
+      switch (error.response.data.status) {
+        case 401:
+          setError('password', { message: 'Wrong password' });
+          break;
+        case 404:
+          setError('email', { message: 'Email not found' });
+          break;
+        default:
+          alert('Something went wrong!');
+      }
     }
     setIsLoading(false);
   };
 
   return (
-    <div className='d-flex justify-content-center align-items-center h-100 w-100'>
-      {isLoading &&
-        <div className={`d-flex align-items-center justify-content-center w-100 h-100 position-absolute ${styles.loading}`}>
-          <Loading width={100} />
-        </div>}
-      <form className='needs-validation' onSubmit={handleSubmit(handleSignin)}>
+    !user.isSignedIn &&
+    <div className='d-flex justify-content-center align-items-center w-100 full-height'>
+      {isLoading && <FullScreenLoading />}
+      <form className='needs-validation mb-5' onSubmit={handleSubmit(handleSignin)}>
         <h1 className='text-center'>Sign In</h1>
         <p className='mb-4 text-center'>Please enter your email and password</p>
         <div className='form-floating has-validation'>
@@ -61,7 +76,10 @@ const Signin = () => {
         </div>
         <input type='submit' className='btn btn-lg btn-primary w-100 mt-1' value='Sign In' />
         <div className='mt-4 text-center'>
-          <p>Don't have an account? <a href='/' className='fw-bold text-decoration-none link-primary'>Sign Up</a></p>
+          <p>
+            Don't have an account?{' '}
+            <Link to='/signup' className='fw-bold text-decoration-none link-primary'>Sign Up</Link>
+          </p>
         </div>
       </form>
     </div>
