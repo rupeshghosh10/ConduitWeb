@@ -23,36 +23,36 @@ const Navbar = () => {
   return (
     <nav className='navbar navbar-expand-sm navbar-dark bg-dark sticky-top'>
       <div className="container-fluid">
-        <a className='navbar-brand mb-0 h1' href='/'>Conduit</a>
+        <a href='/' className='navbar-brand mb-0 h1'>Conduit</a>
         <button className='navbar-toggler' type='button' onClick={handleNavbarCollapse}>
           <span className='navbar-toggler-icon'></span>
         </button>
         <div className={`${isNavbarCollapsed ? 'collapse' : ''} navbar-collapse`}>
           <ul className='navbar-nav mr-auto'>
             <li className='nav-item active'>
-              <a className='nav-link' href='/'>Home</a>
+              <a href='/' className='nav-link'>Home</a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link' href='/'>New Article</a>
+              <a href='/' className='nav-link'>New Article</a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link' href='/'>Settings</a>
+              <a href='/' className='nav-link'>Settings</a>
             </li>
           </ul>
           <ul className='navbar-nav ms-auto'>
             {!user.isSignedIn &&
               <>
                 <li className='nav-item'>
-                  <Link className='nav-link' to='/signin'>Sign in</Link>
+                  <Link to='/signin' className='nav-link'>Sign in</Link>
                 </li>
                 <li className='nav-item'>
-                  <a className='nav-link' href='/'>Sign up</a>
+                  <Link to='/signup' className='nav-link'>Sign up</Link>
                 </li>
               </>}
             {user.isSignedIn &&
               <>
                 <li>
-                  <a className='nav-link' href='/'>{user.email}</a>
+                  <a href='/' className='nav-link'>{user.email}</a>
                 </li>
                 <li>
                   <Link to='/signout' className='nav-link' onClick={handleSignout}>Sign out</Link>

@@ -1,6 +1,9 @@
-import { SIGN_IN, SIGN_OUT } from './userConstant'
+import { SIGN_IN, SIGN_OUT } from './userConstant';
 
-const initialState = {
+const initialState = localStorage.getItem('userState') ? {
+  ...JSON.parse(localStorage.getItem('userState')),
+  isSignedIn: true
+} : {
   email: '',
   username: '',
   token: '',
@@ -11,6 +14,7 @@ const userReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case SIGN_IN:
+      localStorage.setItem('userState', JSON.stringify(action.state));
       return {
         ...state,
         email: action.state.email,
@@ -20,8 +24,12 @@ const userReducer = (state = initialState, action) => {
       }
 
     case SIGN_OUT:
+      localStorage.removeItem('userState');
       return {
-        ...initialState
+        email: '',
+        username: '',
+        token: '',
+        isSignedIn: false
       }
 
     default:
