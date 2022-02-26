@@ -1,23 +1,36 @@
-import { Provider } from 'react-redux';
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
 import Signin from './pages/Signin/Signin';
 import Signup from './pages/Signup/Signup';
-import store from './store/store';
+import UserContext from './components/UserContext/UserContext';
+import { getUser } from './util/userUtil';
+
+const initialUserState = getUser() ? getUser() : {
+  email: '',
+  username: '',
+  token: '',
+  isSignedIn: false
+};
 
 const App = () => {
+
+  const [user, setUser] = useState(initialUserState);
+
   return (
-    <Provider store={store}>
+    <UserContext.Provider value={{ user, setUser }}>
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/signin' element={<Signin />} />
-          <Route exact path='/signup' element={<Signup />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+            <Route exact path='/signin' element={<Signin />} />
+            <Route exact path='/signup' element={<Signup />} />
+          </Routes>
+        </main>
       </BrowserRouter>
-    </Provider>
+    </UserContext.Provider>
   );
 }
 

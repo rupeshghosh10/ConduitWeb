@@ -1,20 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signin } from '../../services/userApi';
-import { signinAction } from '../../store/user/userAction';
 import { Link, useNavigate } from 'react-router-dom';
 import FullScreenLoading from '../../components/FullScreenLoading/FullScreenLoading';
 import Input from '../../components/Input/Input';
 import signinSchema from './signinSchema';
+import UserContext from '../../components/UserContext/UserContext';
+import { saveUser } from '../../util/userUtil';
 
 const Signin = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   const { register, formState: { errors }, handleSubmit, setError } = useForm({ resolver: yupResolver(signinSchema) });
-  const dispatch = useDispatch();
-  const user = useSelector(x => x.user);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +26,7 @@ const Signin = () => {
     setIsLoading(true);
     try {
       const response = await signin(data);
-      dispatch(signinAction(response));
+      saveUser(response, setUser);
       navigate('/');
     }
     catch (error) {
