@@ -7,8 +7,10 @@ const NavTabs = ({ tabs, handleTabClick, activeTab }) => {
         <li key={tab.id} className='nav-item'>
           <Link
             to='/'
-            className={`nav-link ${activeTab === tab.id ? 'active' : ''}`}
-            onClick={() => handleTabClick(tab.id)}>{tab.name}</Link>
+            className={`nav-link link-success ${activeTab === tab.id ? 'active' : ''}`}
+            onClick={() => handleTabClick(tab.id)}>
+            {tab.name}
+          </Link>
         </li>
       ))}
     </ul>
