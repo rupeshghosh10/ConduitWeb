@@ -7,7 +7,7 @@ import FullScreenLoading from '../../components/FullScreenLoading/FullScreenLoad
 import Input from '../../components/Input/Input';
 import signinSchema from './signinSchema';
 import UserContext from '../../components/UserContext/UserContext';
-import { saveUser } from '../../util/userUtil';
+import { saveUser } from '../../util/localStorageUtil';
 
 const Signin = () => {
 

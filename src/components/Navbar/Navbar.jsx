@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../UserContext/UserContext';
 import NavLinkItem from '../NavLinkItem/NavLinkItem';
-import { removeUser } from '../../util/userUtil';
+import { removeUser } from '../../util/localStorageUtil';
 
 const Navbar = () => {
 
@@ -28,12 +28,8 @@ const Navbar = () => {
           <span className='navbar-toggler-icon'></span>
         </button>
         <div className={`${isNavbarCollapsed ? 'collapse' : ''} navbar-collapse`}>
-          <ul className='navbar-nav mr-auto'>
-            <NavLinkItem to='/' text='Home' />
-            <NavLinkItem to='/newarticle' text='New Article' />
-            <NavLinkItem to='/settings' text='Settings' />
-          </ul>
           <ul className='navbar-nav ms-auto'>
+            <NavLinkItem to='/' text='Home' />
             {!user.isSignedIn &&
               <>
                 <NavLinkItem to='/signin' text='Sign In' />
@@ -41,6 +37,8 @@ const Navbar = () => {
               </>}
             {user.isSignedIn &&
               <>
+                <NavLinkItem to='/newarticle' text='New Article' />
+                <NavLinkItem to='/settings' text='Settings' />
                 <NavLinkItem to='/profile' text={user.email} />
                 <li>
                   <Link to='/signout' className='nav-link' onClick={handleSignout}>Sign out</Link>

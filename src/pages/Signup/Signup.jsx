@@ -8,7 +8,7 @@ import { signup } from '../../services/userApi';
 import { useState } from 'react';
 import FullScreenLoading from '../../components/FullScreenLoading/FullScreenLoading';
 import UserContext from '../../components/UserContext/UserContext';
-import { saveUser } from '../../util/userUtil';
+import { saveUser } from '../../util/localStorageUtil';
 
 const Signup = () => {
 
@@ -16,8 +16,6 @@ const Signup = () => {
   const { register, formState: { errors }, handleSubmit, setError } = useForm({ resolver: yupResolver(signupSchema) });
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
-
-  console.log(user);
 
   useEffect(() => {
     if (user.isSignedIn) {
