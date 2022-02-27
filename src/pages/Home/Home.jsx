@@ -3,9 +3,9 @@ import Banner from '../../components/Banner/Banner';
 import NavTabs from '../../components/NavTabs/NavTabs';
 import Loading from '../../components/Loading/Loading';
 import { getArticles } from '../../services/articleApi';
-import { DateTime } from 'luxon';
-import { Link } from 'react-router-dom';
 import ArticleList from '../../components/ArticleList/ArticleList';
+import { getTags } from '../../services/tagApi';
+import TagList from '../../components/TagList/TagList';
 
 const tabs = [
   {
@@ -23,6 +23,7 @@ const Home = () => {
   const [activeTab, setActiveTab] = useState(2);
   const [isLoading, setIsLoading] = useState(true);
   const [articles, setArticles] = useState([]);
+  const [tags, setTags] = useState([]);
 
   const handleTabClick = id => {
     setActiveTab(id);
@@ -33,6 +34,10 @@ const Home = () => {
       const response = await getArticles();
       setArticles(response);
       setIsLoading(false);
+    })();
+    (async () => {
+      const response = await getTags();
+      setTags(response);
     })();
   }, []);
 
@@ -53,6 +58,12 @@ const Home = () => {
               </div>}
           </div>
           <div className='col-md-3'>
+            <div className='card border-success mt-4'>
+              <div className='card-body p-2'>
+                <div className='card-title'>Popular Tags</div>
+                <TagList tags={tags} justifyContent='start' />
+              </div>
+            </div>
           </div>
         </div>
       </div>

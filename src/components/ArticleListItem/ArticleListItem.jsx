@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { DateTime } from 'luxon';
 import TagList from '../TagList/TagList';
+import ArticleMeta from '../ArticleMeta/ArticleMeta';
+import ArtclePreview from '../ArticlePreview/ArticlePreview';
 
 const ArticleListItem = ({ article }) => {
   return (
@@ -8,24 +9,22 @@ const ArticleListItem = ({ article }) => {
       <div className='container'>
         <div className='row'>
           <div className='col-10'>
-            <div className='d-flex flex-column align-items-start justify-content-center'>
-              <Link to='/' className='link-success text-decoration-none fs-6'>{article.author.username}</Link>
-              <p className='small text-secondary mb-0'>{DateTime.fromISO(article.createdAt).toFormat('LLL yy, dd')}</p>
-            </div>
+            <ArticleMeta username={article.author.username} createdAt={article.createdAt} />
           </div>
           <div className='col-2'>
             <button className='btn btn-outline-success btn-sm float-end'>Like</button>
           </div>
         </div>
-        <div className='d-flex flex-column align-items-start justify-content-center mt-2'>
-          <h2>{article.title}</h2>
-          <p>{article.description}</p>
+        <div className='row'>
+          <div className='col-12'>
+            <ArtclePreview title={article.title} description={article.description} />
+          </div>
         </div>
         <div className='row'>
-          <div className='col-8'>
+          <div className='col-6'>
             <Link to='/' className='link-secondary text-decoration-none'>Read More...</Link>
           </div>
-          <div className='col-4'>
+          <div className='col-6'>
             <TagList tags={article.tags} />
           </div>
         </div>

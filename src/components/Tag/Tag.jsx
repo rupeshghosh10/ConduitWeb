@@ -1,6 +1,6 @@
 const Tag = ({ tag }) => {
   return (
-    <li className='border rounded list-inline ms-1 px-1 py-0'>
+    <li className='badge rounded-pill bg-success list-inline px-2 py-1 ms-1 mb-1'>
       {tag}
     </li>
   );
