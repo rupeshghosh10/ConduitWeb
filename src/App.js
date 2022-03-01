@@ -8,6 +8,7 @@ import UserContext from './components/UserContext/UserContext';
 import { getUser } from './util/localStorageUtil';
 import Profile from './pages/Profile/Profile';
 import Settings from './pages/Settings/Settings';
+import RequireAuth from './components/RequireAuth/RequireAuth';
 
 const initialUserState = getUser() ? getUser() : {
   email: '',
@@ -29,8 +30,8 @@ const App = () => {
             <Route exact path='/' element={<Home />} />
             <Route exact path='/signin' element={<Signin />} />
             <Route exact path='/signup' element={<Signup />} />
-            <Route exact path='/profile' element={<Profile />} />
-            <Route exact path='/settings' element={<Settings />} />
+            <Route exact path='/profile' element={<RequireAuth><Profile /></RequireAuth>} />
+            <Route exact path='/settings' element={<RequireAuth><Settings /></RequireAuth>} />
           </Routes>
         </main>
       </BrowserRouter>
