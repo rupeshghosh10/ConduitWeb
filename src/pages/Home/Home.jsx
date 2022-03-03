@@ -6,17 +6,7 @@ import { getArticles } from '../../services/articleApi';
 import ArticleList from '../../components/ArticleList/ArticleList';
 import { getTags } from '../../services/tagApi';
 import TagList from '../../components/TagList/TagList';
-
-const tabs = [
-  {
-    id: 1,
-    name: 'Your Feed'
-  },
-  {
-    id: 2,
-    name: 'Global Feed'
-  }
-];
+import { tabs } from './tabs';
 
 const Home = () => {
 

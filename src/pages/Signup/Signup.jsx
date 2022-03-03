@@ -48,11 +48,34 @@ const Signup = () => {
       <form className='mb-5' onSubmit={handleSubmit(handleSignup)}>
         <h1 className='text-center'>Sign Up</h1>
         <p className='mb-3 text-center'>Please enter your details</p>
-        <Input type='text' name='email' placeholder='Email Address' register={register} error={errors.email} />
-        <Input type='text' name='username' placeholder='Username' register={register} error={errors.username} />
-        <Input type='password' name='password' placeholder='Password' register={register} error={errors.password} />
-        <Input type='password' name='confirmPassword' placeholder='Confirm Password' register={register}
-          error={errors.confirmPassword} />
+        <Input
+          type='text'
+          name='email'
+          placeholder='Email Address'
+          register={register}
+          error={errors.email}
+        />
+        <Input
+          type='text'
+          name='username'
+          placeholder='Username'
+          register={register}
+          error={errors.username}
+        />
+        <Input
+          type='password'
+          name='password'
+          placeholder='Password'
+          register={register}
+          error={errors.password}
+        />
+        <Input
+          type='password'
+          name='confirmPassword'
+          placeholder='Confirm Password'
+          register={register}
+          error={errors.confirmPassword}
+        />
         <input type='submit' className='btn btn-lg btn-primary w-100 mt-1' value='Sign Up' />
         <div className='mt-4 text-center'>
           <p>

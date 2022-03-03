@@ -8,7 +8,7 @@ const RequireAuth = ({ children: Children }) => {
 
   if (!user.isSignedIn) return <Navigate to='/signin' />
 
-  return <Children />
+  return Children;
 }
 
 export default RequireAuth;

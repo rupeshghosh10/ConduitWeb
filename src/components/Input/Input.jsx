@@ -6,7 +6,8 @@ const Input = ({ type, name, placeholder, register, error, defaultValue = null }
         className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`}
         placeholder={placeholder}
         {...register(name)}
-        defaultValue={defaultValue} />
+        defaultValue={defaultValue}
+      />
       <label htmlFor={name}>{placeholder}</label>
       <p className='invalid-feedback m-0 ps-1'>{error?.message}</p>
     </div>

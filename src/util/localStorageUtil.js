@@ -1,7 +1,6 @@
-export const saveUser = (response, setUser) => {
-  const user = { ...response, isSignedIn: true };
-  localStorage.setItem('userState', JSON.stringify(user));
-  setUser(user);
+export const saveUser = (user, setUser) => {
+  localStorage.setItem('userState', JSON.stringify({ ...user, isSignedIn: true }));
+  setUser({ ...user, isSignedIn: true });
 }
 
 export const getUser = () => {
@@ -16,4 +15,8 @@ export const removeUser = setUser => {
     token: '',
     isSignedIn: false
   });
+}
+
+export const getToken = () => {
+  return getUser() ? getUser().token : null;
 }
