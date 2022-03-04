@@ -20,3 +20,11 @@ export const removeUser = setUser => {
 export const getToken = () => {
   return getUser() ? getUser().token : null;
 }
+
+export const getTokenConfig = () => {
+  return getToken() ? {
+    headers: {
+      Authorization: 'Bearer ' + getToken()
+    }
+  } : null
+}

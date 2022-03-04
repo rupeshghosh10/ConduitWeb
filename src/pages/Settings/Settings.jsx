@@ -14,7 +14,9 @@ const Settings = () => {
 
   const { user, setUser } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
-  const { register, formState: { errors }, handleSubmit, setError } = useForm({ resolver: yupResolver(settingSchema) });
+  const { register, formState: { errors }, handleSubmit, setError } = useForm({
+    resolver: yupResolver(settingSchema)
+  });
   const navigate = useNavigate();
 
   const handleUpdate = async data => {

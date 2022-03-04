@@ -3,14 +3,15 @@ const TextArea = ({ type, name, placeholder, register, error, defaultValue = nul
     <div className='form-floating has-validation mb-2'>
       <textarea
         type={type}
-        className='form-control form-control-lg'
+        className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`}
         style={{ height: height }}
         placeholder={placeholder}
         {...register(name)}
-        defaultValue={defaultValue}>
+        defaultValue={defaultValue ?? ''}
+      >
       </textarea>
       <label htmlFor='bio'>{placeholder}</label>
-      <p className='invalid-feedback m-0 ps-1'>{error}</p>
+      <p className='invalid-feedback m-0 ps-1'>{error?.message}</p>
     </div>
   );
 }

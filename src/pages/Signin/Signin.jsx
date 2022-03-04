@@ -12,7 +12,9 @@ import { saveUser } from '../../util/localStorageUtil';
 const Signin = () => {
 
   const [isLoading, setIsLoading] = useState(false);
-  const { register, formState: { errors }, handleSubmit, setError } = useForm({ resolver: yupResolver(signinSchema) });
+  const { register, formState: { errors }, handleSubmit, setError } = useForm({
+    resolver: yupResolver(signinSchema)
+  });
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
