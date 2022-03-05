@@ -3,18 +3,18 @@ import { getComments } from '../../services/articleApi';
 import Loading from '../Loading/Loading';
 import CommentListItem from '../CommentListItem/CommentListItem';
 
-const CommentList = ({ slug }) => {
+const CommentList = ({ slug, comments, setComments }) => {
 
-  const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       const response = await getComments(slug);
+      response.reverse();
       setComments(response);
       setIsLoading(false);
     })();
-  }, []);
+  }, [slug, setComments]);
 
   if (isLoading) {
     return (
@@ -25,7 +25,7 @@ const CommentList = ({ slug }) => {
   }
 
   return (
-    <ul>
+    <ul className='px-0'>
       {comments.length !== 0 && comments.map(comment => <CommentListItem key={comment.commentId} comment={comment} />)}
     </ul>
   );

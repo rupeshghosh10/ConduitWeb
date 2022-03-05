@@ -10,7 +10,7 @@ const TextArea = ({ type, name, placeholder, register, error, defaultValue = nul
         defaultValue={defaultValue ?? ''}
       >
       </textarea>
-      <label htmlFor='bio'>{placeholder}</label>
+      <label htmlFor={name}>{placeholder}</label>
       <p className='invalid-feedback m-0 ps-1'>{error?.message}</p>
     </div>
   );

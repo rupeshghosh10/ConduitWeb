@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 const CommentListItem = ({ comment }) => {
   return (
     <li key={comment.commentId} className='list-unstyled mb-2'>
-      <div className='card border-secondary'>
+      <div className='card'>
         <div className='card-body'>
           <p className='card-text'>{comment.body}</p>
         </div>
-        <div className='card-footer bg-dark bg-opacity-10'>
+        <div className='card-footer bg-secondary bg-opacity-10 py-1'>
           <Link to='/' className='p-0 m-0 small text-success text-decoration-none'>
             {comment.author.username}
           </Link>

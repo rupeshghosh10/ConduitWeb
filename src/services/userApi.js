@@ -1,17 +1,17 @@
 import { getTokenConfig } from '../util/localStorageUtil';
 import instance from './instance';
 
-export const signin = async data => {
-  const response = await instance.post('/user/login', data);
+export const signin = async user => {
+  const response = await instance.post('/user/login', user);
   return response.data;
 }
 
-export const signup = async data => {
-  const response = await instance.post('/user', data);
+export const signup = async user => {
+  const response = await instance.post('/user', user);
   return response.data;
 }
 
-export const update = async data => {
-  const response = await instance.put('/user', data, getTokenConfig());
+export const update = async user => {
+  const response = await instance.put('/user', user, getTokenConfig());
   return response.data;
 }
