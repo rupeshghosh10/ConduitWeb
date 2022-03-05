@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useFieldArray } from 'react-hook-form';
 import styles from './TagsInput.module.css';
 
-const TagsInput = ({ control, register }) => {
+const TagsInput = ({ control, register, name }) => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'tags'
+    name: name
   });
   const [currentTag, setCurrentTag] = useState('');
 
@@ -21,8 +21,8 @@ const TagsInput = ({ control, register }) => {
           <li key={field.id} className='list-unstyled me-1 mb-1'>
             <div className='input-group'>
               <input
-                className={`btn btn-sm btn-outline-primary ${styles.tagButton}`}
-                {...register(`tags.${index}`)}
+                className={`btn btn-sm btn-outline-primary opacity-100 ${styles.tagButton}`}
+                {...register(`${name}.${index}`)}
                 disabled
               />
               <button

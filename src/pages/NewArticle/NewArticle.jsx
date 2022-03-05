@@ -51,7 +51,7 @@ const NewArticle = () => {
             error={errors.body}
             height='20rem'
           />
-          <TagsInput control={control} register={register} />
+          <TagsInput name='tags' control={control} register={register} />
           <div className='mt-3 text-center'>
             <input type='submit' className='btn btn-lg btn-success float-end' value='Publish Article' />
           </div>

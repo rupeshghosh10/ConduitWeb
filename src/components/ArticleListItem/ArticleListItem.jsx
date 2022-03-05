@@ -22,7 +22,7 @@ const ArticleListItem = ({ article }) => {
         </div>
         <div className='row'>
           <div className='col-6'>
-            <Link to='/' className='link-secondary text-decoration-none'>Read More...</Link>
+            <Link to={`/article/${encodeURIComponent(article.slug)}`} className='link-secondary text-decoration-none'>Read More...</Link>
           </div>
           <div className='col-6'>
             <TagList tags={article.tags} />

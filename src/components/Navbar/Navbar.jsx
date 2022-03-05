@@ -37,7 +37,7 @@ const Navbar = () => {
               </>}
             {user.isSignedIn &&
               <>
-                <NavLinkItem to='/newarticle' text='New Article' />
+                <NavLinkItem to='/article/new' text='New Article' />
                 <NavLinkItem to='/settings' text='Settings' />
                 <NavLinkItem to='/profile' text={user.email} />
                 <li>
