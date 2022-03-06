@@ -14,6 +14,11 @@ const TagsInput = ({ control, register, name }) => {
     setCurrentTag(event.target.value);
   }
 
+  const handleAppend = () => {
+    setCurrentTag('');
+    append(currentTag);
+  }
+
   return (
     <>
       <ul className='d-flex align-items-center justify-content-start flex-wrap ps-1 mb-1'>
@@ -38,7 +43,7 @@ const TagsInput = ({ control, register, name }) => {
       </ul>
       <div className='input-group'>
         <input className='form-control' value={currentTag} onChange={handleCurrentTagChange} placeholder='Tag' />
-        <button className='btn btn-success' type="button" onClick={() => append(currentTag)}>Add Tag</button>
+        <button className='btn btn-success' type="button" onClick={handleAppend}>Add Tag</button>
       </div>
     </>
   );

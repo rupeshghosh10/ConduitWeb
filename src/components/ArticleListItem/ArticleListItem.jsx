@@ -12,7 +12,9 @@ const ArticleListItem = ({ article }) => {
             <ArticleMeta username={article.author.username} createdAt={article.createdAt} />
           </div>
           <div className='col-2'>
-            <button className='btn btn-outline-success btn-sm float-end'>Like</button>
+            <button className='btn btn-outline-success btn-sm float-end d-flex'>
+              <i className="bi bi-heart me-1"></i>Favourite
+            </button>
           </div>
         </div>
         <div className='row'>

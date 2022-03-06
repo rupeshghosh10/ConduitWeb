@@ -19,7 +19,7 @@ const AddComment = ({ slug, comments, setComments }) => {
 
   const handlePostComment = async data => {
     try {
-      const response = await postComment(slug, data);
+      const response = await postComment(encodeURIComponent(slug), data);
       setComments([response, ...comments]);
     }
     catch {

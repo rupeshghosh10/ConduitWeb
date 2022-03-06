@@ -16,6 +16,11 @@ export const postArticle = async article => {
   return response.data;
 }
 
+export const deleteArticle = async slug => {
+  const response = await instance.delete(`/article/${slug}`, getTokenConfig());
+  return response.data;
+}
+
 export const getComments = async slug => {
   const response = await instance.get(`/article/${slug}/comments`);
   return response.data;

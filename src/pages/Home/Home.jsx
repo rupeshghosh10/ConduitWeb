@@ -51,7 +51,7 @@ const Home = () => {
             <div className='card border-success mt-4'>
               <div className='card-body p-2'>
                 <div className='card-title'>Popular Tags</div>
-                <TagList tags={tags} justifyContent='start' />
+                <TagList tags={tags.slice(0, 10)} justifyContent='start' />
               </div>
             </div>
           </div>

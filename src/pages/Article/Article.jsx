@@ -5,6 +5,7 @@ import ArticleMeta from '../../components/ArticleMeta/ArticleMeta';
 import TagList from '../../components/TagList/TagList';
 import Loading from '../../components/Loading/Loading';
 import CommentBody from '../../components/CommentBody/CommentBody';
+import ArticleButtons from '../../components/ArticleButtons/ArticleButtons';
 
 const Article = () => {
 
@@ -32,14 +33,13 @@ const Article = () => {
     <>
       <article>
         <div className='py-3 container border-bottom'>
-          <h1>{article.title}</h1>
+          <h1 className='mt-2'>{article.title}</h1>
           <div className='d-flex align-items-center justify-content-start'>
             <ArticleMeta username={article.author.username} createdAt={article.createdAt} />
-            <button className='btn btn-sm btn-outline-success ms-5'>Follow</button>
-            <button className='btn btn-sm btn-outline-success ms-2'>Favourite</button>
+            <ArticleButtons article={article} setIsLoading={setIsLoading} />
           </div>
         </div>
-        <div className='container mt-4 border-bottom pb-3'>
+        <div className='container mt-4 border-bottom pb-4'>
           <p className='fs-5 mb-3'>{article.body}</p>
           <TagList tags={article.tags} justifyContent='start' />
         </div>

@@ -9,7 +9,7 @@ const CommentList = ({ slug, comments, setComments }) => {
 
   useEffect(() => {
     (async () => {
-      const response = await getComments(slug);
+      const response = await getComments(encodeURIComponent(slug));
       response.reverse();
       setComments(response);
       setIsLoading(false);
@@ -18,7 +18,7 @@ const CommentList = ({ slug, comments, setComments }) => {
 
   const handleCommentDelete = async commentId => {
     try {
-      await deleteComment(slug, commentId);
+      await deleteComment(encodeURIComponent(slug), commentId);
       setComments(comments.filter(x => x.commentId !== commentId));
     }
     catch {

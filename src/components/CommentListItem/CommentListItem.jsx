@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Trash from '../Trash/Trash';
 import UserContext from '../UserContext/UserContext';
 
 const CommentListItem = ({ comment, handleCommentDelete }) => {
@@ -26,7 +25,7 @@ const CommentListItem = ({ comment, handleCommentDelete }) => {
               className='btn btn-sm btn-danger float-end my-0 py-0'
               onClick={() => handleCommentDelete(comment.commentId)}
             >
-              <Trash />
+              <i className="bi bi-trash"></i>
             </button>}
         </div>
       </div>
