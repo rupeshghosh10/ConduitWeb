@@ -23,7 +23,7 @@ const AddComment = ({ slug, comments, setComments }) => {
       setComments([response, ...comments]);
     }
     catch {
-      alert('Something went wrong! Cannot add comment.');
+      alert('Something went wrong! Can not add comment');
     }
   }
 

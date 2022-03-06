@@ -25,3 +25,8 @@ export const postComment = async (slug, comment) => {
   const response = await instance.post(`/article/${slug}/comments`, comment, getTokenConfig());
   return response.data;
 } 
+
+export const deleteComment = async (slug, commentId) => {
+  const response = await instance.delete(`/article/${slug}/comments/${commentId}`, getTokenConfig());
+  return response.data;
+}

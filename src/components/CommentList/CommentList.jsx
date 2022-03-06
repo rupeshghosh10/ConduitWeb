@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getComments } from '../../services/articleApi';
+import { deleteComment, getComments } from '../../services/articleApi';
 import Loading from '../Loading/Loading';
 import CommentListItem from '../CommentListItem/CommentListItem';
 
@@ -16,6 +16,16 @@ const CommentList = ({ slug, comments, setComments }) => {
     })();
   }, [slug, setComments]);
 
+  const handleCommentDelete = async commentId => {
+    try {
+      await deleteComment(slug, commentId);
+      setComments(comments.filter(x => x.commentId !== commentId));
+    }
+    catch {
+      alert('Can not delete comment');
+    }
+  }
+
   if (isLoading) {
     return (
       <div className='text-center mt-5'>
@@ -26,7 +36,13 @@ const CommentList = ({ slug, comments, setComments }) => {
 
   return (
     <ul className='px-0'>
-      {comments.length !== 0 && comments.map(comment => <CommentListItem key={comment.commentId} comment={comment} />)}
+      {comments.length > 0 && comments.map(comment => (
+        <CommentListItem
+          key={comment.commentId}
+          comment={comment}
+          handleCommentDelete={handleCommentDelete}
+        />
+      ))}
     </ul>
   );
 }
