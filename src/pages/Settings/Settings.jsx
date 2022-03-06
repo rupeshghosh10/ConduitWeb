@@ -63,9 +63,9 @@ const Settings = () => {
           register={register}
           error={errors.bio}
         />
-        <div className='mt-4 text-center'>
+        <div>
           <input type='submit' className='btn btn-lg btn-success w-100 mt-1' value='Update' />
-          <Link to='/changepassword' className='btn btn-lg btn-danger w-100 mt-1'>Change Password</Link>
+          <Link to='/settings/changepassword' className='btn btn-lg btn-danger w-100 mt-1'>Change Password</Link>
         </div>
       </form>
     </div>

@@ -11,6 +11,7 @@ import Settings from './pages/Settings/Settings';
 import RequireAuth from './components/RequireAuth/RequireAuth';
 import NewArticle from './pages/NewArticle/NewArticle';
 import Article from './pages/Article/Article';
+import ChangePassword from './pages/ChangePassword/ChangePassword';
 
 const initialUserState = getUser() ? getUser() : {
   email: '',
@@ -34,6 +35,7 @@ const App = () => {
             <Route exact path='/signup' element={<Signup />} />
             <Route exact path='/profile' element={<RequireAuth><Profile /></RequireAuth>} />
             <Route exact path='/settings' element={<RequireAuth><Settings /></RequireAuth>} />
+            <Route exact path='/settings/changepassword' element={<RequireAuth><ChangePassword /></RequireAuth>} />
             <Route exact path='/article/new' element={<RequireAuth><NewArticle /></RequireAuth>} />
             <Route exact path='/article/:slug' element={<Article />} />
           </Routes>
