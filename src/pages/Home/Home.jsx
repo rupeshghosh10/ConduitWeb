@@ -7,6 +7,8 @@ import ArticleList from '../../components/ArticleList/ArticleList';
 import { getTags } from '../../services/tagApi';
 import TagList from '../../components/TagList/TagList';
 import { tabs } from './tabs';
+import Pagination from '../../components/Pagination/Pagination';
+import NoArticlesFound from '../../components/NoArticlesFound/NoArticlesFound';
 
 const Home = () => {
 
@@ -14,14 +16,21 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [articles, setArticles] = useState([]);
   const [tags, setTags] = useState([]);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     (async () => {
-      const response = await getArticles();
+      setIsLoading(true);
+      const response = await getArticles(offset);
       setArticles(response);
       setIsLoading(false);
-      const response2 = await getTags();
-      setTags(response2);
+    })();
+  }, [offset]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await getTags();
+      setTags(response);
     })();
   }, []);
 
@@ -33,15 +42,16 @@ const Home = () => {
           <div className='col-md-9'>
             <NavTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
             {isLoading &&
-              <div className='text-center mt-5'>
+              <div className='text-center mt-5 mb-5'>
                 <Loading width={120} />
               </div>}
+            {articles.length === 0 &&
+              <NoArticlesFound />}
             {(articles.length > 0 && !isLoading) &&
-              <div className='mb-4'>
-                <ArticleList articles={articles} />
-              </div>}
+              <ArticleList articles={articles} offset={offset} setOffset={setOffset} />}
+            <Pagination offset={offset} setOffset={setOffset} />
           </div>
-          <div className='col-md-3'>
+          <div className='col-md-3 mb-4'>
             <div className='card border-success mt-4'>
               <div className='card-body p-2'>
                 <div className='card-title'>Popular Tags</div>

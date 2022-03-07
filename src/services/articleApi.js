@@ -1,15 +1,20 @@
 import { getTokenConfig } from '../util/localStorageUtil';
 import instance from './instance';
 
-export const getArticles = async () => {
-  const response = await instance.get('/article');
+export const getArticles = async offset => {
+  const response = await instance.get('/article', {
+    params: {
+      offset: offset
+    }
+  });
   return response.data;
 }
 
-export const getArticlesByAuthor = async username => {
+export const getArticlesByAuthor = async (username, offset) => {
   const response = await instance.get('/article', {
     params: {
-      author: username
+      author: username,
+      offset: offset
     }
   });
   return response.data;

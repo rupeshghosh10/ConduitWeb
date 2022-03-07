@@ -7,6 +7,8 @@ import UserContext from '../../components/UserContext/UserContext';
 import Loading from '../../components/Loading/Loading';
 import ArticleList from '../../components/ArticleList/ArticleList';
 import NavTabs from '../../components/NavTabs/NavTabs';
+import Pagination from '../../components/Pagination/Pagination';
+import NoArticlesFound from '../../components/NoArticlesFound/NoArticlesFound';
 
 const Profile = () => {
 
@@ -15,17 +17,28 @@ const Profile = () => {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState(1);
+  const [offset, setOffset] = useState(0);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
     (async () => {
       const response = await getProfile(location.pathname.slice(2));
       setProfile(response);
-      const response2 = await getArticlesByAuthor(response.username);
-      setArticles(response2);
-      setIsLoading(false);
+      console.log('ran 1');
     })();
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (Object.keys(profile).length !== 0) {
+      (async () => {
+        setIsLoading(true)
+        const response = await getArticlesByAuthor(profile.username, offset);
+        setArticles(response);
+        setIsLoading(false);
+        console.log('ran 2');
+      })();
+    }
+  }, [offset, profile]);
 
   return (
     <>
@@ -52,10 +65,11 @@ const Profile = () => {
               <div className='text-center mt-5'>
                 <Loading width={120} />
               </div>}
+            {articles.length === 0 &&
+              <NoArticlesFound />}
             {(articles.length > 0 && !isLoading) &&
-              <div className='mb-4'>
-                <ArticleList articles={articles} />
-              </div>}
+              <ArticleList articles={articles} />}
+            <Pagination offset={offset} setOffset={setOffset} />
           </div>
         </div>
       </div>
