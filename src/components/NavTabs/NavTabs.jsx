@@ -1,16 +1,13 @@
-import { Link } from 'react-router-dom';
-
-const NavTabs = ({ tabs, handleTabClick, activeTab }) => {
+const NavTabs = ({ tabs, activeTab, setActiveTab }) => {
   return (
     <ul className='nav nav-tabs'>
       {tabs.map(tab => (
         <li key={tab.id} className='nav-item'>
-          <Link
-            to='/'
+          <button
             className={`nav-link link-success ${activeTab === tab.id ? 'active' : ''}`}
-            onClick={() => handleTabClick(tab.id)}>
+            onClick={() => setActiveTab(tab.id)}>
             {tab.name}
-          </Link>
+          </button>
         </li>
       ))}
     </ul>

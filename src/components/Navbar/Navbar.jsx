@@ -39,7 +39,7 @@ const Navbar = () => {
               <>
                 <NavLinkItem to='/article/new' text='New Article' />
                 <NavLinkItem to='/settings' text='Settings' />
-                <NavLinkItem to='/profile' text={user.email} />
+                <NavLinkItem to={`/@${encodeURIComponent(user.username)}`} text={user.email} />
                 <li>
                   <Link to='/signout' className='nav-link' onClick={handleSignout}>Sign out</Link>
                 </li>

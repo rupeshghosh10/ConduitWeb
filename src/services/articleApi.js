@@ -6,6 +6,15 @@ export const getArticles = async () => {
   return response.data;
 }
 
+export const getArticlesByAuthor = async username => {
+  const response = await instance.get('/article', {
+    params: {
+      author: username
+    }
+  });
+  return response.data;
+}
+
 export const getArticle = async slug => {
   const response = await instance.get(`/article/${slug}`);
   return response.data;

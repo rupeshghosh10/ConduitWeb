@@ -15,19 +15,13 @@ const Home = () => {
   const [articles, setArticles] = useState([]);
   const [tags, setTags] = useState([]);
 
-  const handleTabClick = id => {
-    setActiveTab(id);
-  }
-
   useEffect(() => {
     (async () => {
       const response = await getArticles();
       setArticles(response);
       setIsLoading(false);
-    })();
-    (async () => {
-      const response = await getTags();
-      setTags(response);
+      const response2 = await getTags();
+      setTags(response2);
     })();
   }, []);
 
@@ -37,7 +31,7 @@ const Home = () => {
       <div className='container mt-2'>
         <div className='row'>
           <div className='col-md-9'>
-            <NavTabs tabs={tabs} handleTabClick={handleTabClick} activeTab={activeTab} />
+            <NavTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
             {isLoading &&
               <div className='text-center mt-5'>
                 <Loading width={120} />
