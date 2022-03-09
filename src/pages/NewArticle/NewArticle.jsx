@@ -9,18 +9,18 @@ import newArticleSchmea from './newArticleSchema';
 
 const NewArticle = () => {
 
-  const { register, formState: { errors }, handleSubmit, setError, control } = useForm({
+  const { register, formState: { errors }, handleSubmit, control } = useForm({
     resolver: yupResolver(newArticleSchmea)
   });
   const navigate = useNavigate();
 
   const handlePublish = async data => {
     try {
-      const response = await postArticle(data);
+      await postArticle(data);
       navigate('/');
     }
     catch (error) {
-      console.log(error);
+      alert('Something went wrong!');
     }
   }
 

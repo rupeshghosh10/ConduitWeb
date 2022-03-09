@@ -21,7 +21,7 @@ export const getArticlesByAuthor = async (username, offset) => {
 }
 
 export const getArticle = async slug => {
-  const response = await instance.get(`/article/${slug}`);
+  const response = await instance.get(`/article/${slug}`, getTokenConfig());
   return response.data;
 }
 

@@ -33,7 +33,7 @@ const App = () => {
             <Route exact path='/' element={<Home />} />
             <Route exact path='/signin' element={<Signin />} />
             <Route exact path='/signup' element={<Signup />} />
-            <Route exact path='/@:username' element={<RequireAuth><Profile /></RequireAuth>} />
+            <Route exact path='/@:username' element={<Profile />} />
             <Route exact path='/settings' element={<RequireAuth><Settings /></RequireAuth>} />
             <Route exact path='/settings/changepassword' element={<RequireAuth><ChangePassword /></RequireAuth>} />
             <Route exact path='/article/new' element={<RequireAuth><NewArticle /></RequireAuth>} />

@@ -9,6 +9,7 @@ import ArticleList from '../../components/ArticleList/ArticleList';
 import NavTabs from '../../components/NavTabs/NavTabs';
 import Pagination from '../../components/Pagination/Pagination';
 import NoArticlesFound from '../../components/NoArticlesFound/NoArticlesFound';
+import FollowButton from '../../components/FollowButton/FollowButton';
 
 const Profile = () => {
 
@@ -24,7 +25,6 @@ const Profile = () => {
     (async () => {
       const response = await getProfile(location.pathname.slice(2));
       setProfile(response);
-      console.log('ran 1');
     })();
   }, [location.pathname]);
 
@@ -35,7 +35,6 @@ const Profile = () => {
         const response = await getArticlesByAuthor(profile.username, offset);
         setArticles(response);
         setIsLoading(false);
-        console.log('ran 2');
       })();
     }
   }, [offset, profile]);
@@ -45,14 +44,10 @@ const Profile = () => {
       <div className='bg-dark text-white pt-2 pb-3 d-flex flex-column align-items-center justify-content-center'>
         <h3>{profile.username}</h3>
         <p>{profile.bio}</p>
-        <div className='w-75'>
-          {user.username !== profile.username &&
-            <button
-              className='btn btn-sm btn-outline-light float-end'>
-              <i className="bi bi-plus-lg"></i> Follow
-            </button>}
+        <div className='w-75 d-flex align-items-center justify-content-end'>
+          {user.username !== profile.username && <FollowButton profile={profile} />}
           {user.username === profile.username &&
-            <Link to='/settings' className='btn btn-sm btn-outline-light float-end'>
+            <Link to='/settings' className='btn btn-sm btn-outline-light'>
               <i className="bi bi-gear"></i> Edit Profile
             </Link>}
         </div>
