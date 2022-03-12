@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Banner from '../../components/Banner/Banner';
 import NavTabs from '../../components/NavTabs/NavTabs';
 import Loading from '../../components/Loading/Loading';
@@ -6,9 +6,10 @@ import { getArticles } from '../../services/articleApi';
 import ArticleList from '../../components/ArticleList/ArticleList';
 import { getTags } from '../../services/tagApi';
 import TagList from '../../components/TagList/TagList';
-import { tabs } from './tabs';
+import { tabs as mainTabs } from './tabs';
 import Pagination from '../../components/Pagination/Pagination';
 import NoArticlesFound from '../../components/NoArticlesFound/NoArticlesFound';
+import UserContext from '../../components/UserContext/UserContext';
 
 const Home = () => {
 
@@ -17,6 +18,20 @@ const Home = () => {
   const [articles, setArticles] = useState([]);
   const [tags, setTags] = useState([]);
   const [offset, setOffset] = useState(0);
+  const [tabs, setTabs] = useState([]);
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    if (user.isSignedIn) {
+      setTabs([...mainTabs, {
+        id: 3,
+        name: 'Favorite Article'
+      }]);
+    }
+    else {
+      setTabs(mainTabs);
+    }
+  }, [user]);
 
   useEffect(() => {
     (async () => {

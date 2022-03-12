@@ -57,10 +57,10 @@ const Profile = () => {
           <div className='col-md-9'>
             <NavTabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
             {isLoading &&
-              <div className='text-center mt-5'>
+              <div className='text-center my-5'>
                 <Loading width={120} />
               </div>}
-            {articles.length === 0 &&
+            {(!isLoading && articles.length === 0) &&
               <NoArticlesFound />}
             {(articles.length > 0 && !isLoading) &&
               <ArticleList articles={articles} />}
