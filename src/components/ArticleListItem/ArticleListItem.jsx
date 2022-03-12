@@ -2,19 +2,18 @@ import { Link } from 'react-router-dom';
 import TagList from '../TagList/TagList';
 import ArticleMeta from '../ArticleMeta/ArticleMeta';
 import ArtclePreview from '../ArticlePreview/ArticlePreview';
+import Favorite from '../Favorite/Favorite';
 
 const ArticleListItem = ({ article }) => {
   return (
     <article className='p-3 border-bottom'>
       <div className='container'>
         <div className='row'>
-          <div className='col-10'>
+          <div className='col-8'>
             <ArticleMeta username={article.author.username} createdAt={article.createdAt} />
           </div>
-          <div className='col-2'>
-            <button className='btn btn-outline-success btn-sm float-end d-flex'>
-              <i className="bi bi-heart me-1"></i>Favourite
-            </button>
+          <div className='col-4'>
+            <Favorite slug={article.slug} favorited={article.favorited} favoritesCount={article.favoritesCount} />
           </div>
         </div>
         <div className='row'>
@@ -24,7 +23,9 @@ const ArticleListItem = ({ article }) => {
         </div>
         <div className='row'>
           <div className='col-6'>
-            <Link to={`/article/${encodeURIComponent(article.slug)}`} className='link-secondary text-decoration-none'>Read More...</Link>
+            <Link to={`/article/${encodeURIComponent(article.slug)}`} className='link-secondary text-decoration-none'>
+              Read More...
+            </Link>
           </div>
           <div className='col-6'>
             <TagList tags={article.tags} />
