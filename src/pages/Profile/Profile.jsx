@@ -35,15 +35,16 @@ const Profile = () => {
         (async () => {
           const response = await getArticlesByAuthor(profile.username, offset);
           setArticles(response);
+          setIsLoading(false);
         })();
       }
       else if (activeTab === 2) {
         (async () => {
           const response = await getArticlesByFavorite(profile.username, offset);
           setArticles(response);
+          setIsLoading(false);
         })();
       }
-      setIsLoading(false);
     }
   }, [offset, profile, activeTab]);
 

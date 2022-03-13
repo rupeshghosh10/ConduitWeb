@@ -1,14 +1,14 @@
 export const saveUser = (user, setUser) => {
-  localStorage.setItem('userState', JSON.stringify({ ...user, isSignedIn: true }));
+  localStorage.setItem('Conduit_React_userState', JSON.stringify({ ...user, isSignedIn: true }));
   setUser({ ...user, isSignedIn: true });
 }
 
 export const getUser = () => {
-  return JSON.parse(localStorage.getItem('userState'));
+  return JSON.parse(localStorage.getItem('Conduit_React_userState'));
 }
 
 export const removeUser = setUser => {
-  localStorage.removeItem('userState');
+  localStorage.removeItem('Conduit_React_userState');
   setUser({
     email: '',
     username: '',

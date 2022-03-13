@@ -26,7 +26,7 @@ const TagsInput = ({ control, register, name }) => {
           <li key={field.id} className='list-unstyled me-1 mb-1'>
             <div className='input-group'>
               <input
-                className={`btn btn-sm btn-outline-success opacity-100 ${styles.tagButton}`}
+                className={`btn btn-sm btn-outline-success px-0 opacity-100 ${styles.tagButton}`}
                 {...register(`${name}.${index}`)}
                 disabled
               />

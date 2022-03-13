@@ -6,6 +6,7 @@ import TagList from '../../components/TagList/TagList';
 import Loading from '../../components/Loading/Loading';
 import CommentBody from '../../components/CommentBody/CommentBody';
 import ArticleButtons from '../../components/ArticleButtons/ArticleButtons';
+import styles from './Article.module.css';
 
 const Article = () => {
 
@@ -40,7 +41,7 @@ const Article = () => {
           </div>
         </div>
         <div className='container mt-4 border-bottom pb-4'>
-          <p className='fs-5 mb-3'>{article.body}</p>
+          <p className={`fs-5 mb-3 ${styles.articleBody}`}>{article.body}</p>
           <TagList tags={article.tags} justifyContent='start' />
         </div>
       </article>

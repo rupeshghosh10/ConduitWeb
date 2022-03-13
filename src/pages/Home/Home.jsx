@@ -29,28 +29,30 @@ const Home = () => {
       setTabs(mainTabs.filter(x => x.id !== 1 && x.id !== 3));
     }
   }, [user]);
-  
+
   useEffect(() => {
     setIsLoading(true);
     if (activeTab === 1 && user.isSignedIn) {
       (async () => {
         const response = await getArticlesFeed(offset);
         setArticles(response);
+        setIsLoading(false);
       })();
     }
     if (activeTab === 2) {
       (async () => {
         const response = await getArticles(offset);
         setArticles(response);
+        setIsLoading(false);
       })();
     }
     else if (activeTab === 3 && user.isSignedIn) {
       (async () => {
         const response = await getArticlesByFavorite(user.username, offset);
         setArticles(response);
+        setIsLoading(false);
       })();
     }
-    setIsLoading(false);
   }, [offset, activeTab, user]);
 
   useEffect(() => {

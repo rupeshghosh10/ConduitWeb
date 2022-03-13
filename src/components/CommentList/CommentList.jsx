@@ -18,8 +18,8 @@ const CommentList = ({ slug, comments, setComments }) => {
 
   const handleCommentDelete = async commentId => {
     try {
-      await deleteComment(encodeURIComponent(slug), commentId);
       setComments(comments.filter(x => x.commentId !== commentId));
+      await deleteComment(encodeURIComponent(slug), commentId);
     }
     catch {
       alert('Can not delete comment');

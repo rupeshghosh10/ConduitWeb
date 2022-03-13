@@ -3,13 +3,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import styles from './AddComment.module.css';
 import addCommentSchema from './addCommentSchema';
 import { postComment } from '../../services/articleApi';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const AddComment = ({ slug, comments, setComments }) => {
 
   const { register, formState: { errors, isSubmitSuccessful }, handleSubmit, reset } = useForm({
     resolver: yupResolver(addCommentSchema)
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isSubmitSuccessful) {
@@ -18,12 +19,15 @@ const AddComment = ({ slug, comments, setComments }) => {
   }, [isSubmitSuccessful, reset])
 
   const handlePostComment = async data => {
+    setIsLoading(true);
     try {
       const response = await postComment(encodeURIComponent(slug), data);
       setComments([response, ...comments]);
+      setIsLoading(false);
     }
     catch {
       alert('Something went wrong! Can not add comment');
+      setIsLoading(false);
     }
   }
 
@@ -35,6 +39,7 @@ const AddComment = ({ slug, comments, setComments }) => {
           className={`form-control ${styles.addComment} ${errors?.body ? 'is-invalid' : ''}`}
           placeholder='Write Comment'
           {...register('body')}
+          disabled={isLoading}
         >
         </textarea>
         <div className='card-footer bg-secondary bg-opacity-10 py-1'>
