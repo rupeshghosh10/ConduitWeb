@@ -11,8 +11,8 @@ const FollowButton = ({ profile }) => {
 
   const handleFollow = async username => {
     try {
-      await followProfile(encodeURIComponent(username));
       setIsFollowing(true);
+      await followProfile(encodeURIComponent(username));
     }
     catch {
       alert('Something went wrong!');
@@ -21,8 +21,8 @@ const FollowButton = ({ profile }) => {
 
   const handleUnfollow = async username => {
     try {
-      await unfollowProfile(encodeURIComponent(username));
       setIsFollowing(false);
+      await unfollowProfile(encodeURIComponent(username));
     }
     catch {
       alert('Something went wrong!');

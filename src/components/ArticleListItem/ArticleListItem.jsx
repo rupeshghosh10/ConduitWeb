@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import TagList from '../TagList/TagList';
 import ArticleMeta from '../ArticleMeta/ArticleMeta';
 import ArtclePreview from '../ArticlePreview/ArticlePreview';
-import Favorite from '../Favorite/Favorite';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 
 const ArticleListItem = ({ article }) => {
   return (
@@ -13,7 +13,7 @@ const ArticleListItem = ({ article }) => {
             <ArticleMeta username={article.author.username} createdAt={article.createdAt} />
           </div>
           <div className='col-4'>
-            <Favorite slug={article.slug} favorited={article.favorited} favoritesCount={article.favoritesCount} />
+            <FavoriteButton slug={article.slug} favorited={article.favorited} favoritesCount={article.favoritesCount} />
           </div>
         </div>
         <div className='row'>

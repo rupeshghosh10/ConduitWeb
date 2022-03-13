@@ -78,7 +78,7 @@ const Signup = () => {
           register={register}
           error={errors.confirmPassword}
         />
-        <input type='submit' className='btn btn-lg btn-primary w-100 mt-1' value='Sign Up' />
+        <input type='submit' className='btn btn-lg btn-success w-100 mt-1' value='Sign Up' />
         <div className='mt-4 text-center'>
           <p>
             Already have a account?{' '}

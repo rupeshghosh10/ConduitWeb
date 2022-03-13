@@ -54,7 +54,7 @@ const Signin = () => {
         <p className='mb-3 text-center'>Please enter your email and password</p>
         <Input type='text' name='email' placeholder='Email Address' register={register} error={errors.email} />
         <Input type='password' name='password' placeholder='Password' register={register} error={errors.password} />
-        <input type='submit' className='btn btn-lg btn-primary w-100' value='Sign In' />
+        <input type='submit' className='btn btn-lg btn-success w-100' value='Sign In' />
         <div className='mt-4 text-center'>
           <p>
             Don't have an account?{' '}

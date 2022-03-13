@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../../components/UserContext/UserContext';
 import { deleteArticle } from '../../services/articleApi';
-import Favorite from '../Favorite/Favorite';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 import FollowButton from '../FollowButton/FollowButton';
 
 const ArticleButtons = ({ article, setIsLoading }) => {
@@ -34,7 +34,7 @@ const ArticleButtons = ({ article, setIsLoading }) => {
           <i className='bi bi-trash'></i> Delete
         </button>}
       <span className='ms-2'>
-        <Favorite slug={article.slug} favorited={article.favorited} favoritesCount={article.favoritesCount} />
+        <FavoriteButton slug={article.slug} favorited={article.favorited} favoritesCount={article.favoritesCount} />
       </span>
     </div>
   );

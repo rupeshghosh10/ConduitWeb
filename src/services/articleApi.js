@@ -26,6 +26,31 @@ export const getArticlesByAuthor = async (username, offset) => {
   return response.data;
 }
 
+export const getArticlesByFavorite = async (username, offset) => {
+  const response = await instance.get('/article', {
+    params: {
+      favorited: username,
+      offset: offset
+    },
+    headers: {
+      Authorization: getToken() ? 'Bearer ' + getToken() : null
+    }
+  });
+  return response.data
+}
+
+export const getArticlesFeed = async (offset) => {
+  const response = await instance.get('/article/feed', {
+    params: {
+      offset: offset
+    },
+    headers: {
+      Authorization: getToken() ? 'Bearer ' + getToken() : null
+    }
+  });
+  return response.data;
+}
+
 export const getArticle = async slug => {
   const response = await instance.get(`/article/${slug}`, getTokenConfig());
   return response.data;

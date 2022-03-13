@@ -26,12 +26,12 @@ const TagsInput = ({ control, register, name }) => {
           <li key={field.id} className='list-unstyled me-1 mb-1'>
             <div className='input-group'>
               <input
-                className={`btn btn-sm btn-outline-primary opacity-100 ${styles.tagButton}`}
+                className={`btn btn-sm btn-outline-success opacity-100 ${styles.tagButton}`}
                 {...register(`${name}.${index}`)}
                 disabled
               />
               <button
-                className={`btn btn-sm btn-primary ${styles.deleteButton}`}
+                className={`btn btn-sm btn-success ${styles.deleteButton}`}
                 onClick={() => remove(index)}
                 defaultValue='&#x2715;'
               >

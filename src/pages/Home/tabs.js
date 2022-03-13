@@ -6,5 +6,9 @@ export const tabs = [
   {
     id: 2,
     name: 'Global Feed'
+  },
+  {
+    id: 3,
+    name: 'Favorite Article'
   }
 ];

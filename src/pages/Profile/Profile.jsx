@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { getArticlesByAuthor } from '../../services/articleApi';
+import { getArticlesByAuthor, getArticlesByFavorite } from '../../services/articleApi';
 import { getProfile } from '../../services/profileApi';
 import { tabs } from '../Profile/tabs';
 import UserContext from '../../components/UserContext/UserContext';
@@ -30,14 +30,22 @@ const Profile = () => {
 
   useEffect(() => {
     if (Object.keys(profile).length !== 0) {
-      (async () => {
-        setIsLoading(true)
-        const response = await getArticlesByAuthor(profile.username, offset);
-        setArticles(response);
-        setIsLoading(false);
-      })();
+      setIsLoading(true)
+      if (activeTab === 1) {
+        (async () => {
+          const response = await getArticlesByAuthor(profile.username, offset);
+          setArticles(response);
+        })();
+      }
+      else if (activeTab === 2) {
+        (async () => {
+          const response = await getArticlesByFavorite(profile.username, offset);
+          setArticles(response);
+        })();
+      }
+      setIsLoading(false);
     }
-  }, [offset, profile]);
+  }, [offset, profile, activeTab]);
 
   return (
     <>

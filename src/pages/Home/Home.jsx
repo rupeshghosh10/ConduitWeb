@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import Banner from '../../components/Banner/Banner';
 import NavTabs from '../../components/NavTabs/NavTabs';
 import Loading from '../../components/Loading/Loading';
-import { getArticles } from '../../services/articleApi';
+import { getArticles, getArticlesByFavorite, getArticlesFeed } from '../../services/articleApi';
 import ArticleList from '../../components/ArticleList/ArticleList';
 import { getTags } from '../../services/tagApi';
 import TagList from '../../components/TagList/TagList';
@@ -23,24 +23,35 @@ const Home = () => {
 
   useEffect(() => {
     if (user.isSignedIn) {
-      setTabs([...mainTabs, {
-        id: 3,
-        name: 'Favorite Article'
-      }]);
-    }
-    else {
       setTabs(mainTabs);
     }
+    else {
+      setTabs(mainTabs.filter(x => x.id !== 1 && x.id !== 3));
+    }
   }, [user]);
-
+  
   useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      const response = await getArticles(offset);
-      setArticles(response);
-      setIsLoading(false);
-    })();
-  }, [offset]);
+    setIsLoading(true);
+    if (activeTab === 1 && user.isSignedIn) {
+      (async () => {
+        const response = await getArticlesFeed(offset);
+        setArticles(response);
+      })();
+    }
+    if (activeTab === 2) {
+      (async () => {
+        const response = await getArticles(offset);
+        setArticles(response);
+      })();
+    }
+    else if (activeTab === 3 && user.isSignedIn) {
+      (async () => {
+        const response = await getArticlesByFavorite(user.username, offset);
+        setArticles(response);
+      })();
+    }
+    setIsLoading(false);
+  }, [offset, activeTab, user]);
 
   useEffect(() => {
     (async () => {
@@ -60,7 +71,7 @@ const Home = () => {
               <div className='text-center mt-5 mb-5'>
                 <Loading width={120} />
               </div>}
-            {articles.length === 0 &&
+            {(articles.length === 0 && !isLoading) &&
               <NoArticlesFound />}
             {(articles.length > 0 && !isLoading) &&
               <ArticleList articles={articles} offset={offset} setOffset={setOffset} />}

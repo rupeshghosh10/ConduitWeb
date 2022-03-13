@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { favoriteArticle, unfavoriteArticle } from '../../services/articleApi';
 
-const Favorite = ({ slug, favorited, favoritesCount }) => {
+const FavoriteButton = ({ slug, favorited, favoritesCount }) => {
 
   const [isFavorite, setIsFavorite] = useState(favorited);
   const [count, setCount] = useState(favoritesCount);
 
   const handleFavorite = async slug => {
     try {
-      await favoriteArticle(encodeURIComponent(slug))
       setIsFavorite(true);
       setCount(count + 1);
+      await favoriteArticle(encodeURIComponent(slug))
     }
     catch {
       alert('Something went wrong!');
@@ -19,9 +19,9 @@ const Favorite = ({ slug, favorited, favoritesCount }) => {
 
   const handleUnfavorite = async slug => {
     try {
-      await unfavoriteArticle(encodeURIComponent(slug));
       setIsFavorite(false);
       setCount(count - 1);
+      await unfavoriteArticle(encodeURIComponent(slug));
     }
     catch {
       alert('Something went wrong!');
@@ -42,4 +42,4 @@ const Favorite = ({ slug, favorited, favoritesCount }) => {
   );
 }
 
-export default Favorite;
+export default FavoriteButton;
