@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ConduitWeb/static/css/main.4037800e.css",
-    "main.js": "/ConduitWeb/static/js/main.8944b361.js",
+    "main.js": "/ConduitWeb/static/js/main.f95876a8.js",
     "static/media/bootstrap-icons.woff?": "/ConduitWeb/static/media/bootstrap-icons.c1d7432ee75fa194e499.woff",
     "static/media/bootstrap-icons.woff2?": "/ConduitWeb/static/media/bootstrap-icons.a13b815539b49de48d23.woff2",
     "index.html": "/ConduitWeb/index.html",
     "main.4037800e.css.map": "/ConduitWeb/static/css/main.4037800e.css.map",
-    "main.8944b361.js.map": "/ConduitWeb/static/js/main.8944b361.js.map"
+    "main.f95876a8.js.map": "/ConduitWeb/static/js/main.f95876a8.js.map"
   },
   "entrypoints": [
     "static/css/main.4037800e.css",
-    "static/js/main.8944b361.js"
+    "static/js/main.f95876a8.js"
   ]
 }
